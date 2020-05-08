@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { loginFlow } from "./action";
 import { useDispatch, useSelector } from "react-redux";
+
+import { loginFlow } from "./action";
 
 const Login = () => {
   const dispatch = useDispatch();

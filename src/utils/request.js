@@ -5,7 +5,7 @@ import store from "@/store";
 import { logoutFlow } from "@/pages/Login/action";
 
 const RestAdapter = axios.create({
-  baseURL: 'https://test.com/',
+  baseURL: process.env.REACT_APP_BASE_URL
 });
 
 const handleReqConfig = (config) => config;

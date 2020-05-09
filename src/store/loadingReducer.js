@@ -5,7 +5,7 @@ export default (state = {}, action) => {
   if (!matches) return state;
 
   const [, requestName, requestState] = matches;
-  console.log(matches)
+  
   return {
     ...state,
     [requestName]: requestState === "REQUEST",

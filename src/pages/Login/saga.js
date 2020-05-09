@@ -1,10 +1,11 @@
 import { takeLatest } from "redux-saga/effects";
+
+import { httpPost } from "@/utils/request";
 import { doActionGenerator } from "@/store/action";
 import { loginFlow, logoutFlow } from "@/pages/Login/action";
-import Axios from "axios";
 
 const loginService = ({ email, password }) =>
-  Axios.post("https://reqres.in/api/login", {
+  httpPost("/login", {
     email,
     password,
   });

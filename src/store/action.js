@@ -13,27 +13,20 @@ export const createAsyncAction = (actionType) => {
 };
 
 export function* doActionGenerator({ apiService, action, flow }) {
+  const { query, params, callback, config } = action;
   try {
-    const response = yield call(
-      apiService,
-      { ...action.query },
-      { ...action.params }
-    );
+    const response = yield call(apiService, query, params, config);
     const { data } = response;
     if (!data || response.error) {
       yield put(flow.failure(response.error || null));
-      executeCallback(action.callback, true, response.error);
+      executeCallback(callback, true, response.error);
       return;
     }
-    yield put(flow.success(data, { ...action.query }, { ...action.params }));
-    executeCallback(action.callback, false, {
-      data: { ...data },
-      query: { ...action.query },
-      params: { ...action.params },
-    });
+    yield put(flow.success(data, query, params));
+    executeCallback(callback, false, { data, query, params });
   } catch (error) {
     yield put(flow.failure(error));
-    executeCallback(action.callback, true, error);
+    executeCallback(callback, true, error);
   }
 }
 
